@@ -54,11 +54,10 @@ class Calculator:
         return result
     
     def divide_integer(self, a, b):
-        """整数除算（バグ含む）"""
+        """整数除算"""
         if b == 0:
             raise ValueError("ゼロで割ることはできません")
-        # BUG: 切り捨て除算のつもりが四捨五入になっている
-        result = round(a / b)  # 本来はint(a / b)または a // b を使うべき
+        result = a // b
         self.history.append(f"{a} ÷ {b} (整数) = {result}")
         return result
     
