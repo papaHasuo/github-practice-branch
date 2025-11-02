@@ -67,6 +67,14 @@ class Calculator:
         self.history.append(f"{a} ÷ {b} (整数) = {result}")
         return result
     
+    def percentage(self, value, total):
+        """パーセンテージ計算"""
+        if total == 0:
+            raise ValueError("全体の値がゼロの場合、パーセンテージは計算できません")
+        result = (value / total) * 100
+        self.history.append(f"{value} / {total} × 100 = {result}%")
+        return result
+    
     def get_history(self):
         """計算履歴を取得"""
         return self.history.copy()
@@ -101,6 +109,10 @@ def main():
     
     # 新機能：整数除算（バグ含む）
     print(f"7 ÷ 2 (整数) = {calc.divide_integer(7, 2)}")  # バグ: 3.5が4に丸められる
+    
+    # 新機能：パーセンテージ計算
+    print(f"25 / 100 = {calc.percentage(25, 100)}%")
+    print(f"75 / 200 = {calc.percentage(75, 200)}%")
     
     print("\n計算履歴:")
     for entry in calc.get_history():
