@@ -39,13 +39,8 @@ class Calculator:
         return result
     
     def power(self, a, b):
-        """べき乗（バグ含む）"""
-        # BUG: 負の指数の処理が間違っている
-        if b < 0:
-            result = a ** b  # 本来はa ** (-b)の逆数を返すべき
-            result = result * -1  # 間違った処理：負数を掛けている
-        else:
-            result = a ** b
+        """べき乗"""
+        result = a ** b
         self.history.append(f"{a} ^ {b} = {result}")
         return result
     
