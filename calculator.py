@@ -50,10 +50,11 @@ class Calculator:
         return result
     
     def square_root(self, a):
-        """平方根（バグ含む）"""
+        """平方根"""
         import math
-        # BUG: 負数の平方根を処理していない
-        result = math.sqrt(a)  # 負数の場合エラーになる
+        if a < 0:
+            raise ValueError("負の数の平方根は計算できません")
+        result = math.sqrt(a)
         self.history.append(f"√{a} = {result}")
         return result
     
