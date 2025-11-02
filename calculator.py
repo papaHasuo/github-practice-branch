@@ -49,6 +49,23 @@ class Calculator:
         self.history.append(f"{a} ^ {b} = {result}")
         return result
     
+    def square_root(self, a):
+        """平方根（バグ含む）"""
+        import math
+        # BUG: 負数の平方根を処理していない
+        result = math.sqrt(a)  # 負数の場合エラーになる
+        self.history.append(f"√{a} = {result}")
+        return result
+    
+    def divide_integer(self, a, b):
+        """整数除算（バグ含む）"""
+        if b == 0:
+            raise ValueError("ゼロで割ることはできません")
+        # BUG: 切り捨て除算のつもりが四捨五入になっている
+        result = round(a / b)  # 本来はint(a / b)または a // b を使うべき
+        self.history.append(f"{a} ÷ {b} (整数) = {result}")
+        return result
+    
     def get_history(self):
         """計算履歴を取得"""
         return self.history.copy()
@@ -73,6 +90,16 @@ def main():
     # 新機能：べき乗（バグ含む）
     print(f"2 ^ 3 = {calc.power(2, 3)}")
     print(f"5 ^ -2 = {calc.power(5, -2)}")  # ここでバグが発生
+    
+    # 新機能：平方根（バグ含む）
+    print(f"√9 = {calc.square_root(9)}")
+    try:
+        print(f"√-4 = {calc.square_root(-4)}")  # ここでバグが発生
+    except ValueError as e:
+        print(f"エラー: {e}")
+    
+    # 新機能：整数除算（バグ含む）
+    print(f"7 ÷ 2 (整数) = {calc.divide_integer(7, 2)}")  # バグ: 3.5が4に丸められる
     
     print("\n計算履歴:")
     for entry in calc.get_history():
