@@ -38,6 +38,17 @@ class Calculator:
         self.history.append(f"{a} / {b} = {result}")
         return result
     
+    def power(self, a, b):
+        """べき乗（バグ含む）"""
+        # BUG: 負の指数の処理が間違っている
+        if b < 0:
+            result = a ** b  # 本来はa ** (-b)の逆数を返すべき
+            result = result * -1  # 間違った処理：負数を掛けている
+        else:
+            result = a ** b
+        self.history.append(f"{a} ^ {b} = {result}")
+        return result
+    
     def get_history(self):
         """計算履歴を取得"""
         return self.history.copy()
@@ -58,6 +69,10 @@ def main():
     print(f"10 - 4 = {calc.subtract(10, 4)}")
     print(f"6 * 7 = {calc.multiply(6, 7)}")
     print(f"15 / 3 = {calc.divide(15, 3)}")
+    
+    # 新機能：べき乗（バグ含む）
+    print(f"2 ^ 3 = {calc.power(2, 3)}")
+    print(f"5 ^ -2 = {calc.power(5, -2)}")  # ここでバグが発生
     
     print("\n計算履歴:")
     for entry in calc.get_history():
